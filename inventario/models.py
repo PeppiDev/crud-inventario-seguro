@@ -1,7 +1,11 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 
 class Producto(models.Model):
+    CANTIDAD_MIN = 0
+    CANTIDAD_MAX = 9999
+
     CATEGORIAS = [
         ('oficina', 'Oficina'),
         ('limpieza', 'Limpieza'),
@@ -11,7 +15,10 @@ class Producto(models.Model):
 
     nombre = models.CharField(max_length=100)
     categoria = models.CharField(max_length=20, choices=CATEGORIAS)
-    cantidad = models.IntegerField()
+    cantidad = models.IntegerField(
+        validators=[MinValueValidator(CANTIDAD_MIN), MaxValueValidator(CANTIDAD_MAX)],
+        help_text=f'Entre {CANTIDAD_MIN} y {CANTIDAD_MAX} unidades.',
+    )
     correo_proveedor = models.EmailField()
     creado = models.DateTimeField(auto_now_add=True)
     actualizado = models.DateTimeField(auto_now=True)
