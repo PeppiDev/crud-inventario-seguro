@@ -1,9 +1,9 @@
 #!/bin/bash
 # Despliegue del CRUD en PythonAnywhere: dependencias, migraciones, estáticos, chequeos y pruebas.
 # Lo ejecuta una tarea programada; la salida queda en ~/crud-inventario/logs/deploy.log
-cd /home/PeppiDev/crud-inventario || exit 1
+cd "$HOME/crud-inventario" || exit 1
 mkdir -p logs
-source /home/PeppiDev/.virtualenvs/crud/bin/activate
+source "$HOME/.virtualenvs/crud/bin/activate"
 {
   echo "===== Despliegue $(date -u '+%Y-%m-%d %H:%M:%S UTC') ====="
   echo '$ python --version'; python --version
