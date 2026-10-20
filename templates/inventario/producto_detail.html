@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ producto.nombre }}</h2>
+<dl>
+  <dt>Categoría</dt><dd>{{ producto.get_categoria_display }}</dd>
+  <dt>Cantidad</dt><dd>{{ producto.cantidad }}</dd>
+  <dt>Correo del proveedor</dt><dd>{{ producto.correo_proveedor }}</dd>
+  <dt>Última actualización</dt><dd>{{ producto.actualizado }}</dd>
+</dl>
+<p><a class="btn" href="{% url 'inventario:editar' producto.pk %}">Editar</a> <a href="{% url 'inventario:lista' %}">Volver</a></p>
+{% endblock %}
