@@ -1,0 +1,33 @@
+# Mensaje ZAP id 6
+
+## Petición
+GET http://127.0.0.1:8000/static/css/app.css HTTP/1.1
+Host: 127.0.0.1:8000
+Proxy-Connection: keep-alive
+sec-ch-ua-platform: "Linux"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/159.0.8154.6 Safari/537.36
+sec-ch-ua: "HeadlessChrome";v="159", "Not/A)Brand";v="8", "Chromium";v="159"
+sec-ch-ua-mobile: ?0
+Accept: text/css,*/*;q=0.1
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: style
+Referer: http://127.0.0.1:8000/cuentas/login/?next=/
+Cookie: csrftoken=[OCULTO]
+[cuerpo omitido]
+
+## Respuesta
+HTTP/1.1 200 OK
+Server: gunicorn
+Date: Wed, 18 Nov 2026 00:58:30 GMT
+Connection: close
+Content-Type: text/css; charset="utf-8"
+Cache-Control: max-age=60, public
+Vary: Accept-Encoding
+Last-Modified: Wed, 18 Nov 2026 00:56:27 GMT
+ETag: "6afd21eb-3e7"
+Content-Length: 999
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+[cuerpo omitido]

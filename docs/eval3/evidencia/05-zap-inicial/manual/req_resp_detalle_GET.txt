@@ -1,0 +1,34 @@
+# Mensaje ZAP id 21
+
+## Petición
+GET http://127.0.0.1:8000/1/ HTTP/1.1
+Host: 127.0.0.1:8000
+Proxy-Connection: keep-alive
+sec-ch-ua: "HeadlessChrome";v="159", "Not/A)Brand";v="8", "Chromium";v="159"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Linux"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/159.0.8154.6 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:8000/
+Cookie: csrftoken=[OCULTO]; sessionid=[OCULTO]
+[cuerpo omitido]
+
+## Respuesta
+HTTP/1.1 200 OK
+Server: gunicorn
+Date: Wed, 18 Nov 2026 00:43:55 GMT
+Connection: close
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Vary: Cookie
+Content-Length: 1873
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Set-Cookie: csrftoken=[OCULTO]; expires=Wed, 17 Nov 2027 00:43:55 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+[cuerpo omitido]

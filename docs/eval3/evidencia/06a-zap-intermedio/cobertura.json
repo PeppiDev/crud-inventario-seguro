@@ -1,0 +1,58 @@
+{
+  "etiqueta": "final",
+  "zap_version": "2.17.0",
+  "inicio": "2026-11-17 21:47:03 -0300",
+  "objetivo": "http://127.0.0.1:8000",
+  "contexto": "crud-lab",
+  "mensajes": "61",
+  "hosts_en_sites": [
+    "127.0.0.1"
+  ],
+  "urls_visitadas": [
+    "http://127.0.0.1:8000",
+    "http://127.0.0.1:8000/",
+    "http://127.0.0.1:8000/1",
+    "http://127.0.0.1:8000/1/",
+    "http://127.0.0.1:8000/1/editar",
+    "http://127.0.0.1:8000/1/editar/",
+    "http://127.0.0.1:8000/1/eliminar",
+    "http://127.0.0.1:8000/1/eliminar/",
+    "http://127.0.0.1:8000/2",
+    "http://127.0.0.1:8000/2/",
+    "http://127.0.0.1:8000/2/eliminar",
+    "http://127.0.0.1:8000/2/eliminar/",
+    "http://127.0.0.1:8000/cuentas",
+    "http://127.0.0.1:8000/cuentas/login",
+    "http://127.0.0.1:8000/cuentas/login/",
+    "http://127.0.0.1:8000/cuentas/login/?next=/1/",
+    "http://127.0.0.1:8000/cuentas/logout",
+    "http://127.0.0.1:8000/cuentas/logout/",
+    "http://127.0.0.1:8000/nuevo",
+    "http://127.0.0.1:8000/nuevo/",
+    "http://127.0.0.1:8000/static",
+    "http://127.0.0.1:8000/static/css",
+    "http://127.0.0.1:8000/static/css/app.css"
+  ],
+  "pasos": [
+    "GET / sin sesión (redirige al login)",
+    "Login inválido de ana",
+    "Login válido de ana",
+    "Crear 2 productos y 1 rechazado por validación (cantidad 10000)",
+    "Detalle y edición del producto 1",
+    "Eliminar el producto 2",
+    "Logout por POST con CSRF",
+    "Login válido de beto",
+    "beto pide /1/ (producto de ana) -> 404",
+    "beto pide /1/editar/ (producto de ana) -> 404",
+    "beto pide /1/eliminar/ (producto de ana) -> 404",
+    "sofia (supervisora) ve el detalle 1 -> 200",
+    "sofia intenta editar 1 -> 404",
+    "Sin sesión, GET /1/ -> 200 http://127.0.0.1:8000/cuentas/login/?next=/1/"
+  ],
+  "resumen_alertas": {
+    "High": 0,
+    "Low": 0,
+    "Medium": 1,
+    "Informational": 26
+  }
+}

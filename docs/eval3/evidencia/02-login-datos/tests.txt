@@ -1,0 +1,7 @@
+$ uv run python manage.py test
+Ran 34 tests in 6.642s
+
+OK
+Destroying test database for alias 'default'...
+Found 34 test(s).
+System check identified no issues (0 silenced).

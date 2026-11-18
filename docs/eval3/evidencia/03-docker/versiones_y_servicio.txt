@@ -1,0 +1,44 @@
+$ podman --version
+podman version 5.8.4
+$ docker compose version
+Docker Compose version 5.4.0
+$ docker compose exec web python -c "...versiones..."
+Python 3.13.18 | Django 5.2.18 | gunicorn 27.0.1 | whitenoise 6.12.0 | django-csp 4.0
+$ docker compose exec web id
+uid=10001(app) gid=10001(app) groups=10001(app)
+$ zap.sh -version (imagen ghcr.io/zaproxy/zaproxy:stable)
+2.17.0
+
+$ docker compose ps
+NAME                    IMAGE                                   COMMAND                  SERVICE   CREATED         STATUS         PORTS
+crud-inventario-web-1   docker.io/library/crud-inventario:lab   "sh -c python manage…"   web       5 minutes ago   Up 5 minutes   127.0.0.1:8000->8000/tcp
+
+$ podman inspect --format "{{.State.Health.Status}}" crud-inventario-web-1
+healthy
+
+$ podman port crud-inventario-web-1
+8000/tcp -> 127.0.0.1:8000
+
+$ podman images crud-inventario
+localhost/crud-inventario:0c33273  42b323f6988e  162 MB
+docker.io/library/crud-inventario:lab  42b323f6988e  162 MB
+localhost/crud-inventario:a06d7b5  56e83dc11748  162 MB
+localhost/crud-inventario:afac9b3  c00a417a75ac  162 MB
+localhost/crud-inventario:c9fd872  5d357134b8b4  161 MB
+
+$ docker compose exec web ls /app
+config
+inventario
+manage.py
+requirements.txt
+static
+staticfiles
+templates
+
+$ docker compose logs --tail 6 web
+web-1  | 10.89.0.2 - - [17/Nov/2026:22:01:10 -0300] "POST /cuentas/logout/ HTTP/1.1" 302 0 "http://127.0.0.1:8000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/159.0.8154.6 Safari/537.36"
+web-1  | 10.89.0.2 - - [17/Nov/2026:22:01:10 -0300] "GET /cuentas/login/ HTTP/1.1" 200 1006 "http://127.0.0.1:8000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/159.0.8154.6 Safari/537.36"
+web-1  | 10.89.0.2 - - [17/Nov/2026:22:01:25 -0300] "GET /1/ HTTP/1.1" 302 0 "-" "curl/8.18.0"
+web-1  | 10.89.0.2 - - [17/Nov/2026:22:01:25 -0300] "POST /nuevo/ HTTP/1.1" 403 1429 "-" "curl/8.18.0"
+web-1  | 10.89.0.2 - - [17/Nov/2026:22:01:25 -0300] "GET /cuentas/logout/ HTTP/1.1" 405 0 "-" "curl/8.18.0"
+web-1  | 127.0.0.1 - - [17/Nov/2026:22:01:34 -0300] "GET /cuentas/login/ HTTP/1.1" 200 1006 "-" "Python-urllib/3.13"

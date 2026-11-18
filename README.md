@@ -79,3 +79,7 @@ uv run python manage.py migrate
 uv run python manage.py crear_cuentas_prueba
 uv run python manage.py runserver
 ```
+
+## Evaluación 3
+
+Informe por secciones, evidencia y reportes ZAP en `docs/eval3/`. Scripts del laboratorio (recorrido ZAP, extracción de evidencia, capturas) en `scripts/lab/`. El PDF se genera con `uv run --with playwright --with markdown python docs/eval3/generar_pdf.py`.

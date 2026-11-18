@@ -22,3 +22,8 @@ staticfiles/
 # Herramientas
 .scannerwork/
 logs/
+
+# Informe Eval 3: archivos generados por docs/eval3/generar_pdf.py
+docs/eval3/Informe_Eval3.md
+docs/eval3/Informe_Eval3_Ulloa_Castillo.pdf
+*.render.html

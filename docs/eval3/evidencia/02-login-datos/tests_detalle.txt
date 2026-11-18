@@ -1,0 +1,37 @@
+$ uv run python manage.py test -v 2
+test_anonimo_no_puede_escribir ... ok
+test_rutas_privadas_redirigen_al_login ... ok
+test_login_invalido_se_rechaza ... ok
+test_login_valido_redirige_al_inventario ... ok
+test_logout_con_token_csrf_cierra_sesion ... ok
+test_logout_por_get_no_cierra_sesion ... ok
+test_logout_sin_token_csrf_se_rechaza ... ok
+test_crear_asigna_propietario_desde_la_sesion ... ok
+test_detalle_ajeno_404 ... ok
+test_editar_ajeno_404_y_sin_cambios ... ok
+test_eliminar_ajeno_404_y_sigue_existiendo ... ok
+test_lista_muestra_solo_los_propios ... ok
+test_consulta_ajena_con_correo_enmascarado ... ok
+test_no_puede_editar_ni_eliminar_lo_ajeno ... ok
+test_cookie_csrftoken_httponly ... ok
+test_csp_estricta_en_login_y_crud ... ok
+test_html_sin_estilos_ni_scripts_inline ... ok
+test_paginas_privadas_no_se_guardan_en_cache ... ok
+test_sesion_dura_una_jornada ... ok
+test_css_sin_cors_abierto ... ok
+test_c1_cantidad_dentro_del_rango_se_acepta ... ok
+test_c2_cantidad_bajo_el_minimo_se_rechaza ... ok
+test_c3a_cantidad_minimo_exacto_cero_se_acepta ... ok
+test_c3b_cantidad_maximo_exacto_9999_se_acepta ... ok
+test_c3c_cantidad_sobre_el_maximo_se_rechaza ... ok
+test_c4_categoria_legitima_se_acepta ... ok
+test_c5a_categoria_fuera_de_la_lista_se_rechaza ... ok
+test_c5b_categoria_faltante_se_rechaza ... ok
+test_c6_categoria_etiqueta_en_vez_de_valor_se_rechaza ... ok
+test_crear ... ok
+test_editar ... ok
+test_eliminar ... ok
+test_listar ... ok
+test_listar_requiere_login ... ok
+Ran 34 tests in 6.640s
+OK
