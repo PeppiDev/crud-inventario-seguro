@@ -23,7 +23,7 @@ Todas las fuentes se consultaron el 17-11-2026.
 
 **Entregables vinculados.**
 
-- Repositorio: [ENLACE_REPOSITORIO]
-- Pull Request `eval3 → master`: [ENLACE_PR]
+- Repositorio: https://github.com/PeppiDev/crud-inventario-seguro
+- Pull Request `eval3 → master`: https://github.com/PeppiDev/crud-inventario-seguro/pull/1
 - Reportes ZAP (HTML, JSON y MD): `evidencia/05-zap-inicial/`, `06a-zap-intermedio/` y `06-zap-final/`
 - Evidencia de SonarQube, login, Docker y git: `evidencia/01-sonarqube/`, `02-login-datos/`, `03-docker/` y `07-git/`
