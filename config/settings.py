@@ -169,6 +169,9 @@ STORAGES = {
     'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
     'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage'},
 }
+# WhiteNoise agrega Access-Control-Allow-Origin: * por defecto (ZAP 10098).
+# El CSS solo lo usa este mismo sitio, así que no se permite acceso cruzado.
+WHITENOISE_ALLOW_ALL_ORIGINS = False
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'inventario:lista'

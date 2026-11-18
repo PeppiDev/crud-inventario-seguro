@@ -50,3 +50,11 @@ class CabecerasTests(TestCase):
         self.assertEqual(r.status_code, 200)  # inválido: sin cookie de sesión
         self.client.force_login(self.usuario)
         self.assertEqual(self.client.session.get_expiry_age(), 8 * 60 * 60)
+
+
+class EstaticosTests(TestCase):
+    def test_css_sin_cors_abierto(self):
+        from whitenoise.middleware import WhiteNoiseMiddleware
+        from django.conf import settings
+        self.assertFalse(settings.WHITENOISE_ALLOW_ALL_ORIGINS)
+        self.assertFalse(WhiteNoiseMiddleware(lambda r: None).allow_all_origins)
