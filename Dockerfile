@@ -12,7 +12,14 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY . .
+# Solo lo que la app necesita, carpeta por carpeta (Sonar docker:S6470).
+# Así un .env, una base de datos o un archivo nuevo en la raíz no entran a la
+# imagen aunque alguien olvide actualizar .dockerignore.
+COPY manage.py ./
+COPY config/ config/
+COPY inventario/ inventario/
+COPY templates/ templates/
+COPY static/ static/
 
 # Usuario sin privilegios; /data guarda la base SQLite (volumen).
 RUN useradd --uid 10001 --create-home app \
