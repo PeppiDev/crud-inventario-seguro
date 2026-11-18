@@ -1,0 +1,23 @@
+# Entornos y cachés
+.venv/
+__pycache__/
+*.py[cod]
+# Secretos y datos locales
+.env
+.env.*
+!.env.example
+*.sqlite3
+db.sqlite3*
+# Generados
+staticfiles/
+logs/
+.scannerwork/
+# Ajenos a la construcción
+.git/
+.gitignore
+.dockerignore
+compose.yaml
+Dockerfile
+deploy.sh
+sonar-project.properties
+*.md

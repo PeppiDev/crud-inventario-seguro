@@ -1,0 +1,27 @@
+# Laboratorio local del CRUD. Uso: docker compose up --build -d
+services:
+  web:
+    build: .
+    image: crud-inventario:lab
+    env_file: .env            # DJANGO_SECRET_KEY y demás; ver .env.example
+    environment:
+      DJANGO_DEBUG: "False"   # perfil de laboratorio: nunca con DEBUG
+      DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1"
+      DJANGO_SQLITE_PATH: /data/db.sqlite3
+    ports:
+      - "127.0.0.1:8000:8000" # solo la interfaz local del equipo anfitrión
+    volumes:
+      - sqlite_data:/data
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/cuentas/login/')"]
+      interval: 30s
+      timeout: 3s
+      start_period: 20s
+    restart: unless-stopped
+
+volumes:
+  sqlite_data:

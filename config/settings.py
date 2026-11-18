@@ -37,6 +37,15 @@ DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
+# Perfil de transporte. True (por defecto) = el sitio se sirve por HTTPS, como en
+# PythonAnywhere: las cookies solo viajan cifradas y se envía HSTS.
+# El laboratorio Docker es HTTP en 127.0.0.1, por eso su .env pone False.
+HTTPS = os.getenv('DJANGO_HTTPS', 'True') == 'True'
+SESSION_COOKIE_SECURE = HTTPS
+CSRF_COOKIE_SECURE = HTTPS
+if HTTPS:
+    SECURE_HSTS_SECONDS = 3600
+
 
 # Application definition
 
@@ -52,6 +61,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -86,7 +96,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # En Docker la base vive en un volumen (/data), fuera de la imagen.
+        'NAME': os.getenv('DJANGO_SQLITE_PATH', BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -127,6 +138,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+# WhiteNoise sirve los estáticos con DEBUG=False (gunicorn no lo hace).
+STORAGES = {
+    'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
+    'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage'},
+}
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'inventario:lista'
