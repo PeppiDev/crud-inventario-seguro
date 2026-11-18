@@ -5,6 +5,7 @@ from .models import Producto
 
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'categoria', 'cantidad', 'correo_proveedor']
+    list_display = ['nombre', 'categoria', 'cantidad', 'propietario']
     list_filter = ['categoria']
     search_fields = ['nombre']
+    readonly_fields = ['propietario']
