@@ -6,7 +6,7 @@ Analizamos con SonarQube Community 26.10 en un contenedor local. Para la base us
 
 | Hallazgo heredado / nuevo | Regla | Archivo | Prioridad | Decisión | Commit |
 |---|---|---|---|---|---|
-| SECRET_KEY por defecto en el código | secrets:S6687 | `config/settings.py` L28 | Blocker | Corregir. La app no arranca sin la variable y la clave antigua se da por revocada (queda en el historial). | `a748986` |
+| SECRET_KEY por defecto en el código | secrets:S6687 | `config/settings.py` L28 | Blocker | Corregir. La app no arranca sin la variable y la clave antigua (respaldo de desarrollo, nunca usada en producción) se da por revocada (queda en el historial). | `a748986` |
 | Contraseña de prueba en tests (Eval 2) | S2068 / S6437 | `inventario/test_*.py` | Alta | Ya resuelto en Eval 2 al clasificar los tests como código de prueba; las contraseñas de prueba ahora salen de `secrets.token_urlsafe`. | `81cbd0b`, `4a69e52` |
 | `COPY . .` en el Dockerfile (código nuevo) | docker:S6470 | `Dockerfile` L15 | Critical | Corregir. Se copia carpeta por carpeta, así un `.env` o una base de datos no entran a la imagen aunque falle `.dockerignore`. | `0c33273` |
 
