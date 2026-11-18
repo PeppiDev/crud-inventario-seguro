@@ -8,10 +8,14 @@ Reglas de acceso (se comprueban en el servidor, en cada petición):
   proveedor enmascarado. No puede editarlos ni eliminarlos.
 
 Los registros ajenos responden 404, no 403, para no confirmar que existen.
+Todas las respuestas del CRUD llevan Cache-Control: no-store (never_cache):
+son datos privados y no deben quedar en la caché del navegador o de un proxy.
 """
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from .forms import ProductoForm
@@ -20,14 +24,19 @@ from .models import Producto
 PERMISO_VER_TODOS = 'inventario.ver_todos'
 
 
-class PropiosMixin(LoginRequiredMixin):
+@method_decorator(never_cache, name='dispatch')
+class PrivadoMixin(LoginRequiredMixin):
+    """Exige sesión iniciada y prohíbe guardar la respuesta en caché."""
+
+
+class PropiosMixin(PrivadoMixin):
     """Limita el queryset a los productos del usuario que hace la petición."""
 
     def get_queryset(self):
         return Producto.objects.filter(propietario=self.request.user)
 
 
-class ConsultaMixin(LoginRequiredMixin):
+class ConsultaMixin(PrivadoMixin):
     """Para lectura: los propios, o todos si el usuario es supervisor."""
 
     def get_queryset(self):
@@ -46,7 +55,7 @@ class ProductoDetailView(ConsultaMixin, DetailView):
     model = Producto
 
 
-class ProductoCreateView(LoginRequiredMixin, CreateView):
+class ProductoCreateView(PrivadoMixin, CreateView):
     model = Producto
     form_class = ProductoForm
     success_url = reverse_lazy('inventario:lista')

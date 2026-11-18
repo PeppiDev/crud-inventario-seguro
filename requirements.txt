@@ -3,9 +3,15 @@
 asgiref==3.12.1
     # via django
 django==5.2.18
+    # via
+    #   crud-inventario
+    #   django-csp
+django-csp==4.0
     # via crud-inventario
 gunicorn==27.0.1
     # via crud-inventario
+packaging==26.3
+    # via django-csp
 python-dotenv==1.2.4
     # via crud-inventario
 sqlparse==0.6.0

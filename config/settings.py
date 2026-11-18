@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+from csp.constants import NONE, SELF
 from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
@@ -46,6 +47,28 @@ CSRF_COOKIE_SECURE = HTTPS
 if HTTPS:
     SECURE_HSTS_SECONDS = 3600
 
+# Cookies y sesión (Evaluación 3, hallazgos ZAP 10010 y revisión de sesiones).
+# La app no lee csrftoken desde JavaScript, así que puede ser HttpOnly sin romper nada.
+CSRF_COOKIE_HTTPONLY = True
+# Sesión de una jornada (8 h) en vez de las 2 semanas por defecto de Django.
+SESSION_COOKIE_AGE = 8 * 60 * 60
+
+# Content-Security-Policy (hallazgo ZAP 10038), con django-csp 4.
+# La app solo usa recursos propios: un CSS en /static/ y ningún script ni
+# estilo inline, por eso basta 'self' y no hace falta 'unsafe-inline'.
+CONTENT_SECURITY_POLICY = {
+    'DIRECTIVES': {
+        'default-src': [SELF],
+        'script-src': [SELF],
+        'style-src': [SELF],
+        'img-src': [SELF],
+        'object-src': [NONE],
+        'base-uri': [SELF],
+        'form-action': [SELF],
+        'frame-ancestors': [NONE],
+    },
+}
+
 
 # Application definition
 
@@ -57,6 +80,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'inventario',
+    'csp',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +92,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
