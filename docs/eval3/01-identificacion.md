@@ -6,10 +6,10 @@
 |---|---|
 | Integrantes | Benjamín Ulloa · Vicente Castillo |
 | Proyecto | CRUD Inventario (Django 5.2.18 LTS, Python 3.13), continuación de la Evaluación 2 |
-| Rama de trabajo | `eval3` (6 commits sobre `master` = `94ae13b`, versión final de la Evaluación 2) |
+| Rama de trabajo | `eval3` (sobre `master` = `94ae13b`, versión final de la Evaluación 2), integrada por el PR #1 |
 | Versión analizada | Inicial `c9fd872` · Final `0c33273` (imagen `crud-inventario:0c33273`) |
 | Repositorio / PR | https://github.com/PeppiDev/crud-inventario-seguro · https://github.com/PeppiDev/crud-inventario-seguro/pull/1 |
-| Fecha | 17-11-2026 |
+| Fecha | 18-11-2026 |
 
 ## 1. Identificación
 
@@ -21,8 +21,8 @@
 
 | Integrante | Aporte |
 |---|---|
-| Benjamín Ulloa | Autorización por propietario y permiso de supervisor; pruebas de login, logout y acceso; Dockerfile y Compose; recorridos y reportes ZAP; correcciones (CSP, cookies, caché, CORS, Dockerfile); análisis SonarQube; redacción de las secciones 2, 4, 5 y 6. |
-| Vicente Castillo | Inventario de activos y comparación entre industrias; mecanismos de protección y sus límites; revisión de sesiones y cookies; amenazas STRIDE; revisión cruzada de hallazgos y del informe; redacción de las secciones 3 y 7. |
+| Benjamín Ulloa | Autorización por propietario y permiso de supervisor; pruebas de login, logout y acceso; Dockerfile y Compose; recorridos y reportes ZAP; correcciones (CSP, cookies, caché, CORS, Dockerfile); análisis SonarQube; redacción de las secciones 1, 2, 4, 5, 6 y 8. |
+| Vicente Castillo | Inventario de activos y comparación entre industrias; mecanismos de protección y sus límites; revisión de sesiones y cookies; amenazas STRIDE; revisión cruzada de hallazgos y del informe; redacción de las secciones 3 y 7; revisión y aprobación del PR #1 (pruebas, cabeceras, Docker y evidencia sin secretos). |
 
 **Historial de cambios (rama `eval3`).**
 
@@ -34,6 +34,9 @@
 | `afac9b3` | CSP estricta, CSS externo, `csrftoken` HttpOnly, sesión de 8 h, `never_cache` | Hallazgos ZAP Z-01, Z-02 y caché |
 | `a06d7b5` | WhiteNoise sin `Access-Control-Allow-Origin: *` | Hallazgo ZAP Z-06 |
 | `0c33273` | Dockerfile copia solo las carpetas de la app | Sonar docker:S6470 (versión final) |
+| `b4e78f0` | Scripts del laboratorio (`scripts/lab/`): recorrido ZAP, evidencia sin secretos, capturas | Reproducibilidad |
+| `c2181dc` · `190dfa6` · `af6fcf5` | Informe y evidencia: secciones 1, 2, 4, 5, 6 y 8 (Benjamín) | Informe |
+| `9bdf354` | Secciones 3, STRIDE y 7 (Vicente) | Informe |
 
 ![Historial de commits](img/historial.png){.term}
-<p class="pie">Figura 1. Historial de la rama eval3 y archivos cambiados respecto de master.</p>
+<p class="pie">Figura 1. Historial de la rama eval3 (commits de ambos integrantes).</p>

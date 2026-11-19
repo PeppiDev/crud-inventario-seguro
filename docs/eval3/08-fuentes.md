@@ -1,6 +1,6 @@
 ## 8. Fuentes
 
-Todas las fuentes se consultaron el 17-11-2026.
+Todas las fuentes se consultaron el 17-11-2026 y el 18-11-2026.
 
 - Django 5.2. *Using the authentication system*: <https://docs.djangoproject.com/en/5.2/topics/auth/default/>
 - Django 5.2. *How to use sessions*: <https://docs.djangoproject.com/en/5.2/topics/http/sessions/>
@@ -25,5 +25,9 @@ Todas las fuentes se consultaron el 17-11-2026.
 
 - Repositorio: https://github.com/PeppiDev/crud-inventario-seguro
 - Pull Request `eval3 → master`: https://github.com/PeppiDev/crud-inventario-seguro/pull/1
-- Reportes ZAP (HTML, JSON y MD): `evidencia/05-zap-inicial/`, `06a-zap-intermedio/` y `06-zap-final/`
-- Evidencia de SonarQube, login, Docker y git: `evidencia/01-sonarqube/`, `02-login-datos/`, `03-docker/` y `07-git/`
+- Reportes ZAP completos (HTML, JSON y MD):
+  - Inicial: <https://github.com/PeppiDev/crud-inventario-seguro/tree/master/docs/eval3/evidencia/05-zap-inicial>
+  - Intermedio: <https://github.com/PeppiDev/crud-inventario-seguro/tree/master/docs/eval3/evidencia/06a-zap-intermedio>
+  - Final: <https://github.com/PeppiDev/crud-inventario-seguro/tree/master/docs/eval3/evidencia/06-zap-final>
+- Evidencia de SonarQube, login, Docker y git: <https://github.com/PeppiDev/crud-inventario-seguro/tree/master/docs/eval3/evidencia>
+- README con los pasos para reproducir el laboratorio: <https://github.com/PeppiDev/crud-inventario-seguro#readme>
