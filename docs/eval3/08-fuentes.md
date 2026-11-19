@@ -23,8 +23,8 @@ Todas las fuentes se consultaron el 17-11-2026 y el 18-11-2026.
 
 **Entregables vinculados.**
 
-- Repositorio: https://github.com/PeppiDev/crud-inventario-seguro
-- Pull Request `eval3 → master`: https://github.com/PeppiDev/crud-inventario-seguro/pull/1
+- Repositorio: <https://github.com/PeppiDev/crud-inventario-seguro>
+- Pull Request `eval3 → master`: <https://github.com/PeppiDev/crud-inventario-seguro/pull/1>
 - Reportes ZAP completos (HTML, JSON y MD):
   - Inicial: <https://github.com/PeppiDev/crud-inventario-seguro/tree/master/docs/eval3/evidencia/05-zap-inicial>
   - Intermedio: <https://github.com/PeppiDev/crud-inventario-seguro/tree/master/docs/eval3/evidencia/06a-zap-intermedio>

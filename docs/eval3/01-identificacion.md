@@ -8,7 +8,7 @@
 | Proyecto | CRUD Inventario (Django 5.2.18 LTS, Python 3.13), continuación de la Evaluación 2 |
 | Rama de trabajo | `eval3` (sobre `master` = `94ae13b`, versión final de la Evaluación 2), integrada por el PR #1 |
 | Versión analizada | Inicial `c9fd872` · Final `0c33273` (imagen `crud-inventario:0c33273`) |
-| Repositorio / PR | https://github.com/PeppiDev/crud-inventario-seguro · https://github.com/PeppiDev/crud-inventario-seguro/pull/1 |
+| Repositorio / PR | <https://github.com/PeppiDev/crud-inventario-seguro> · <https://github.com/PeppiDev/crud-inventario-seguro/pull/1> |
 | Fecha | 18-11-2026 |
 
 ## 1. Identificación
