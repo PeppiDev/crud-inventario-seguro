@@ -1,0 +1,42 @@
+# Mensaje ZAP id 9
+
+## Petición
+POST http://127.0.0.1:8000/cuentas/login/ HTTP/1.1
+Host: 127.0.0.1:8000
+Proxy-Connection: keep-alive
+Content-Length: 129
+Cache-Control: max-age=0
+sec-ch-ua: "HeadlessChrome";v="159", "Not/A)Brand";v="8", "Chromium";v="159"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Linux"
+Upgrade-Insecure-Requests: 1
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/159.0.8154.6 Safari/537.36
+Origin: http://127.0.0.1:8000
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/jxl,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:8000/cuentas/login/
+Cookie: csrftoken=[OCULTO]
+[cuerpo omitido]
+
+## Respuesta
+HTTP/1.1 302 Found
+Server: gunicorn
+Date: Wed, 18 Nov 2026 00:43:54 GMT
+Connection: close
+Content-Type: text/html; charset=utf-8
+Location: /
+Expires: Wed, 18 Nov 2026 00:43:54 GMT
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate, private
+Vary: Cookie
+X-Frame-Options: DENY
+Content-Length: 0
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Set-Cookie: csrftoken=[OCULTO]; expires=Wed, 17 Nov 2027 00:43:54 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+Set-Cookie: sessionid=[OCULTO]; expires=Wed, 02 Dec 2026 00:43:54 GMT; HttpOnly; Max-Age=1209600; Path=/; SameSite=Lax
+[cuerpo omitido]

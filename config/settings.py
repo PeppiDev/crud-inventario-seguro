@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+from csp.constants import NONE, SELF
+from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,13 +26,48 @@ load_dotenv(BASE_DIR / '.env')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-k^hgz(li#9f+i%&ng-o)x3232mj4y*5!#0!ev@ax!pt+lwl60e')
+# La clave se carga solo desde el entorno (.env). Si falta, la app no arranca:
+# así no existe un valor por defecto en el código que pueda terminar en producción
+# (hallazgo secrets:S6687 de la Evaluación 2).
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+if not SECRET_KEY:
+    raise ImproperlyConfigured('Falta la variable de entorno DJANGO_SECRET_KEY (ver .env.example).')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+
+# Perfil de transporte. True (por defecto) = el sitio se sirve por HTTPS, como en
+# PythonAnywhere: las cookies solo viajan cifradas y se envía HSTS.
+# El laboratorio Docker es HTTP en 127.0.0.1, por eso su .env pone False.
+HTTPS = os.getenv('DJANGO_HTTPS', 'True') == 'True'
+SESSION_COOKIE_SECURE = HTTPS
+CSRF_COOKIE_SECURE = HTTPS
+if HTTPS:
+    SECURE_HSTS_SECONDS = 3600
+
+# Cookies y sesión (Evaluación 3, hallazgos ZAP 10010 y revisión de sesiones).
+# La app no lee csrftoken desde JavaScript, así que puede ser HttpOnly sin romper nada.
+CSRF_COOKIE_HTTPONLY = True
+# Sesión de una jornada (8 h) en vez de las 2 semanas por defecto de Django.
+SESSION_COOKIE_AGE = 8 * 60 * 60
+
+# Content-Security-Policy (hallazgo ZAP 10038), con django-csp 4.
+# La app solo usa recursos propios: un CSS en /static/ y ningún script ni
+# estilo inline, por eso basta 'self' y no hace falta 'unsafe-inline'.
+CONTENT_SECURITY_POLICY = {
+    'DIRECTIVES': {
+        'default-src': [SELF],
+        'script-src': [SELF],
+        'style-src': [SELF],
+        'img-src': [SELF],
+        'object-src': [NONE],
+        'base-uri': [SELF],
+        'form-action': [SELF],
+        'frame-ancestors': [NONE],
+    },
+}
 
 
 # Application definition
@@ -43,16 +80,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'inventario',
+    'csp',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -81,7 +121,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # En Docker la base vive en un volumen (/data), fuera de la imagen.
+        'NAME': os.getenv('DJANGO_SQLITE_PATH', BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -122,6 +163,15 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+# WhiteNoise sirve los estáticos con DEBUG=False (gunicorn no lo hace).
+STORAGES = {
+    'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
+    'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage'},
+}
+# WhiteNoise agrega Access-Control-Allow-Origin: * por defecto (ZAP 10098).
+# El CSS solo lo usa este mismo sitio, así que no se permite acceso cruzado.
+WHITENOISE_ALLOW_ALL_ORIGINS = False
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'inventario:lista'

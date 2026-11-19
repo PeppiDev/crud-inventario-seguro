@@ -4,8 +4,9 @@
 <dl>
   <dt>Categoría</dt><dd>{{ producto.get_categoria_display }}</dd>
   <dt>Cantidad</dt><dd>{{ producto.cantidad }}</dd>
-  <dt>Correo del proveedor</dt><dd>{{ producto.correo_proveedor }}</dd>
+  <dt>Correo del proveedor</dt><dd>{% if producto.propietario_id == user.pk %}{{ producto.correo_proveedor }}{% else %}{{ producto.correo_enmascarado }}{% endif %}</dd>
+  <dt>Responsable</dt><dd>{{ producto.propietario.username }}</dd>
   <dt>Última actualización</dt><dd>{{ producto.actualizado }}</dd>
 </dl>
-<p><a class="btn" href="{% url 'inventario:editar' producto.pk %}">Editar</a> <a href="{% url 'inventario:lista' %}">Volver</a></p>
+<p>{% if producto.propietario_id == user.pk %}<a class="btn" href="{% url 'inventario:editar' producto.pk %}">Editar</a> {% endif %}<a href="{% url 'inventario:lista' %}">Volver</a></p>
 {% endblock %}

@@ -1,0 +1,10 @@
+$ curl -sS -o /dev/null -D - http://127.0.0.1:8000/1/   # anónimo, petición directa
+HTTP/1.1 302 Found
+Location: /cuentas/login/?next=/1/
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate, private
+
+$ curl -sS -o /dev/null -w "%{http_code}\n" -X POST http://127.0.0.1:8000/nuevo/   # escritura anónima sin CSRF
+403
+
+$ curl -sS -o /dev/null -w "%{http_code}\n" http://127.0.0.1:8000/cuentas/logout/   # logout por GET
+405

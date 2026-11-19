@@ -1,0 +1,12 @@
+SESSION_ENGINE django.contrib.sessions.backends.db
+SESSION_SERIALIZER django.contrib.sessions.serializers.JSONSerializer
+SESSION_COOKIE_AGE 28800 HTTPONLY True SAMESITE Lax SECURE False
+CSRF_COOKIE_HTTPONLY True CSRF_COOKIE_SECURE False
+DB /data/db.sqlite3
+filas django_session 0
+claves en session_data None
+hasher django.contrib.auth.hashers.PBKDF2PasswordHasher
+formato password ['pbkdf2_sha256', '1000000']
+filas django_session (ana con sesión abierta): 1
+columnas: session_key (clave aleatoria de 32 caracteres), session_data (firmado), expire_date = 2026-11-18 09:04:22.125300+00:00
+claves en session_data: ['_auth_user_backend', '_auth_user_hash', '_auth_user_id']

@@ -1,0 +1,17 @@
+### Prueba 1: reflejo del parámetro next con comillas y etiqueta
+$ curl "http://127.0.0.1:8000/cuentas/login/?next=%22%3E%3Cscript%3Ealert(1)%3C/script%3E" | grep name=\"next\"
+  <input type="hidden" name="next" value="&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;">
+
+### Prueba 2: login con next externo (redirección abierta)
+$ curl -X POST http://127.0.0.1:8000/cuentas/login/ -d "username=ana&password=[OCULTO]&next=https://sitio-externo.example/" -> cabecera Location
+Location: /
+
+### Prueba 3: nombre de producto con HTML, devuelto en el formulario (cantidad inválida fuerza el reenvío)
+$ POST /nuevo/ nombre="\"><script>alert(1)</script>" cantidad=10000 -> input id_nombre
+    .errorlist { color: #dc2626; margin: .2rem 0; padding-left: 1rem; }
+    <input type="text" name="nombre" value="&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;" maxlength="100" required id="id_nombre">
+  <ul class="errorlist" id="id_cantidad_error"><li>Asegúrese de que este valor es menor o igual a 9999.</li></ul>
+
+### Prueba 4: categoría fuera de la lista
+    .errorlist { color: #dc2626; margin: .2rem 0; padding-left: 1rem; }
+  <ul class="errorlist" id="id_categoria_error"><li>Escoja una opción válida. &quot;&gt;x no es una de las opciones disponibles.</li></ul>

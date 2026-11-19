@@ -1,0 +1,52 @@
+$ git log --oneline --graph master..eval3 + base
+* 9bdf354 2026-11-18 Vicente Castillo  Informe Eval 3: datos, sesiones e industrias, amenazas STRIDE y conclusiones
+* af6fcf5 2026-11-18 PeppiDev  Informe Eval 3: aclarar que la clave de respaldo nunca se usó en producción
+* 190dfa6 2026-11-18 PeppiDev  Informe Eval 3: enlaces al repositorio y al PR #1
+* c2181dc 2026-11-18 PeppiDev  Informe Eval 3: secciones 1, 2, 4, 5, 6 y 8 con evidencia y reportes ZAP
+* b4e78f0 2026-11-18 PeppiDev  Scripts del laboratorio: recorrido ZAP, evidencia sin secretos y capturas
+* 0c33273 2026-11-17 PeppiDev  Dockerfile: copiar solo las carpetas de la app (Sonar docker:S6470)
+* a06d7b5 2026-11-17 PeppiDev  WhiteNoise sin Access-Control-Allow-Origin: * (ZAP 10098)
+* afac9b3 2026-11-17 PeppiDev  Correcciones del análisis ZAP: CSP, cookie CSRF y caché privada
+* c9fd872 2026-11-17 PeppiDev  Laboratorio Docker Compose con perfil seguro
+* 4a69e52 2026-11-17 PeppiDev  Autorización por propietario y pruebas de login/logout
+* a748986 2026-11-17 PeppiDev  Exigir DJANGO_SECRET_KEY desde el entorno (Sonar secrets:S6687)
+* 94ae13b 2026-10-20 PeppiDev  deploy.sh: usar $HOME en vez de una ruta fija
+* e3e6bd2 2026-10-20 PeppiDev  Script de despliegue para PythonAnywhere
+* 81cbd0b 2026-10-20 PeppiDev  Sonar: clasificar test_*.py como código de prueba
+* 4e2b8e2 2026-10-20 PeppiDev  Validar rango de cantidad (0 a 9999) en el modelo
+* 188bde0 2026-10-20 PeppiDev  Agregar casos de validación de cantidad y categoría
+* a0a8178 2026-10-20 PeppiDev  Configurar análisis SonarQube
+* 8d9686b 2026-10-20 PeppiDev  CRUD de inventario: versión inicial
+
+$ git diff --stat master..eval3 -- . ':!docs'
+ .dockerignore                                      |  23 +++
+ .env.example                                       |   7 +-
+ .gitignore                                         |  20 ++-
+ Dockerfile                                         |  33 ++++
+ README.md                                          |  84 ++++++++--
+ compose.yaml                                       |  27 ++++
+ config/settings.py                                 |  56 ++++++-
+ inventario/admin.py                                |   3 +-
+ inventario/management/__init__.py                  |   0
+ inventario/management/commands/__init__.py         |   0
+ .../management/commands/crear_cuentas_prueba.py    |  31 ++++
+ .../migrations/0003_propietario_y_permisos.py      |  25 +++
+ inventario/models.py                               |  16 ++
+ inventario/test_acceso.py                          | 156 ++++++++++++++++++
+ inventario/test_cabeceras.py                       |  60 +++++++
+ inventario/tests.py                                |   2 +-
+ inventario/views.py                                |  51 +++++-
+ pyproject.toml                                     |   3 +
+ requirements.txt                                   |  10 ++
+ scripts/lab/capturas_e3.py                         |  56 +++++++
+ scripts/lab/md_a_pdf.py                            |  42 +++++
+ scripts/lab/reset_lab.sh                           |  11 ++
+ scripts/lab/texto_a_png.py                         |  28 ++++
+ scripts/lab/zap_evidencia.py                       |  48 ++++++
+ scripts/lab/zap_lab.py                             | 176 +++++++++++++++++++++
+ static/css/app.css                                 |  13 ++
+ templates/base.html                                |  18 +--
+ templates/inventario/producto_detail.html          |   5 +-
+ templates/inventario/producto_list.html            |  11 +-
+ uv.lock                                            |  46 ++++++
+ 30 files changed, 1015 insertions(+), 46 deletions(-)

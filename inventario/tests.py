@@ -11,7 +11,7 @@ class CrudProductoTests(TestCase):
         self.client.force_login(self.user)
         self.producto = Producto.objects.create(
             nombre='Resma carta', categoria='oficina', cantidad=10,
-            correo_proveedor='ventas@proveedor.cl',
+            correo_proveedor='ventas@proveedor.cl', propietario=self.user,
         )
 
     def test_listar_requiere_login(self):

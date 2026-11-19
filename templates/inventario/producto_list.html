@@ -2,18 +2,21 @@
 {% block content %}
 <p><a class="btn" href="{% url 'inventario:crear' %}">Nuevo producto</a></p>
 <table>
-  <thead><tr><th>Nombre</th><th>Categoría</th><th>Cantidad</th><th>Proveedor</th><th></th></tr></thead>
+  <thead><tr><th>Nombre</th><th>Categoría</th><th>Cantidad</th><th>Proveedor</th><th>Responsable</th><th></th></tr></thead>
   <tbody>
   {% for p in producto_list %}
     <tr>
       <td><a href="{% url 'inventario:detalle' p.pk %}">{{ p.nombre }}</a></td>
       <td>{{ p.get_categoria_display }}</td>
       <td>{{ p.cantidad }}</td>
-      <td>{{ p.correo_proveedor }}</td>
-      <td><a href="{% url 'inventario:editar' p.pk %}">Editar</a> · <a href="{% url 'inventario:eliminar' p.pk %}">Eliminar</a></td>
+      {# El correo completo solo se envía al dueño del registro; el resto ve la versión enmascarada. #}
+      <td>{% if p.propietario_id == user.pk %}{{ p.correo_proveedor }}{% else %}{{ p.correo_enmascarado }}{% endif %}</td>
+      <td>{{ p.propietario.username }}</td>
+      {# Ocultar los enlaces es solo comodidad: el permiso real lo comprueba la vista. #}
+      <td>{% if p.propietario_id == user.pk %}<a href="{% url 'inventario:editar' p.pk %}">Editar</a> · <a href="{% url 'inventario:eliminar' p.pk %}">Eliminar</a>{% endif %}</td>
     </tr>
   {% empty %}
-    <tr><td colspan="5">No hay productos registrados.</td></tr>
+    <tr><td colspan="6">No hay productos registrados.</td></tr>
   {% endfor %}
   </tbody>
 </table>

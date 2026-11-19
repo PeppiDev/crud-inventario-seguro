@@ -1,0 +1,3 @@
+[error] http://127.0.0.1:8000/1/ Failed to load resource: the server responded with a status of 404 (Not Found)
+[error] http://127.0.0.1:8000/1/editar/ Failed to load resource: the server responded with a status of 404 (Not Found)
+[error] http://127.0.0.1:8000/1/editar/ Failed to load resource: the server responded with a status of 404 (Not Found)
